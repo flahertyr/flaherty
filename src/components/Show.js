@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
-import EditIcon from '@material-ui/icons/Edit';
-
-
 
 class Show extends Component {
 
@@ -61,7 +58,7 @@ class Show extends Component {
               <dd>{this.state.solanSun.time}</dd>
             </dl>
             <Link to={`/edit/${this.state.key}`} class="btn btn-success">Edit</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger"><EditIcon fontSize="large"></EditIcon></button>
+            <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger"></button>
           </div>
         </div>
       </div>

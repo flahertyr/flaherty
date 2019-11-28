@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
+import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+
+
 
 class userList extends Component {
   constructor(props) {
@@ -44,7 +47,7 @@ class userList extends Component {
        
           <div class="panel-heading">
           <div class="Link">
-            <h4><Link to="/create"></Link></h4>
+            <h4><Link to="/create"><LibraryAddIcon fontSize="large"></LibraryAddIcon></Link></h4>
             </div>
             <h3 class="panel-title">
               Solan Sunbed Pending Jobs
