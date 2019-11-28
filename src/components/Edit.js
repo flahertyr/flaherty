@@ -8,22 +8,26 @@ class Edit extends Component {
     super(props);
     this.state = {
       key: '',
-      title: '',
+      location: '',
       description: '',
-      author: ''
+      equipment: '',
+      date: '',
+      time: ''
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('solanSun').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
-        const board = doc.data();
+        const solanSun = doc.data();
         this.setState({
           key: doc.id,
-          title: board.title,
-          description: board.description,
-          author: board.author
+          location: solanSun.location,
+          description: solanSun.description,
+          equipment: solanSun.equipment,
+          date: solanSun.date,
+          time: solanSun.time
         });
       } else {
         console.log("No such document!");
@@ -34,25 +38,29 @@ class Edit extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({board:state});
+    this.setState({solanSun:state});
   }
 
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { title, description, author } = this.state;
+    const { location, description, equipment, date, time } = this.state;
 
-    const updateRef = firebase.firestore().collection('boards').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('solanSun').doc(this.state.key);
     updateRef.set({
-      title,
-      description,
-      author
+        location,
+        description,
+        equipment,
+        date,
+        time
     }).then((docRef) => {
       this.setState({
         key: '',
-        title: '',
+        location: '',
         description: '',
-        author: ''
+        equipment: '',
+        date: '',
+        time: ''
       });
       this.props.history.push("/show/"+this.props.match.params.id)
     })
@@ -67,23 +75,31 @@ class Edit extends Component {
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">
-              EDIT BOARD
+              EDIT JOB
             </h3>
           </div>
           <div class="panel-body">
-            <h4><Link to={`/show/${this.state.key}`} class="btn btn-primary">Board List</Link></h4>
+            <h4><Link to={`/show/${this.state.key}`} class="btn btn-primary">JOB LIST</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="Title" />
+                <label for="Location">Title:</label>
+                <input type="text" class="form-control" name="location" value={this.state.location} onChange={this.onChange} placeholder="Location" />
               </div>
               <div class="form-group">
                 <label for="description">Description:</label>
-                <input type="text" class="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="Description" />
+                <textArea class="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{this.state.description}</textArea>
               </div>
               <div class="form-group">
-                <label for="author">Author:</label>
-                <input type="text" class="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder="Author" />
+                <label for="equipment">Equipment:</label>
+                <input type="text" class="form-control" name="location" value={this.state.equipment} onChange={this.onChange} placeholder="Equipment" />
+              </div>
+              <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="text" class="form-control" name="date" value={this.state.date} onChange={this.onChange} placeholder="Date" />
+              </div>
+              <div class="form-group">
+                <label for="time">Time:</label>
+                <input type="text" class="form-control" name="time" value={this.state.time} onChange={this.onChange} placeholder="Time" />
               </div>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>

@@ -1,15 +1,17 @@
-import * as firebase from 'firebase';
-import firestore from 'firebase/firestore'
+const firebase = require("firebase");
+require("firebase/firestore");
 
 const settings = {timestampsInSnapshots: true};
 
 const config = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET"
+  apiKey: "AIzaSyBjzAwcJNauNB6-aRfcMF_nhDm1zzjKEdU",
+    authDomain: "chat-a7859.firebaseapp.com",
+    databaseURL: "https://chat-a7859.firebaseio.com",
+    projectId: "chat-a7859",
+    storageBucket: "chat-a7859.appspot.com",
+    messagingSenderId: "675010776994",
 };
+
 firebase.initializeApp(config);
 
 firebase.firestore().settings(settings);

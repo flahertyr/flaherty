@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import firebase from '../Firebase';
 import { Link } from 'react-router-dom';
+import EditIcon from '@material-ui/icons/Edit';
+
+
 
 class Show extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      board: {},
+      solanSun: {},
       key: ''
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('solanSun').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
         this.setState({
-          board: doc.data(),
+        solanSun: doc.data(),
           key: doc.id,
           isLoading: false
         });
@@ -28,7 +31,7 @@ class Show extends Component {
   }
 
   delete(id){
-    firebase.firestore().collection('boards').doc(id).delete().then(() => {
+    firebase.firestore().collection('solanSun').doc(id).delete().then(() => {
       console.log("Document successfully deleted!");
       this.props.history.push("/")
     }).catch((error) => {
@@ -41,25 +44,30 @@ class Show extends Component {
       <div class="container">
         <div class="panel panel-default">
           <div class="panel-heading">
-          <h4><Link to="/">Board List</Link></h4>
+          <h4><Link to="/">Edit Solan Sunbeds Job</Link></h4>
             <h3 class="panel-title">
-              {this.state.board.title}
+              {this.state.solanSun.location}
             </h3>
           </div>
           <div class="panel-body">
             <dl>
               <dt>Description:</dt>
-              <dd>{this.state.board.description}</dd>
-              <dt>Author:</dt>
-              <dd>{this.state.board.author}</dd>
+              <dd>{this.state.solanSun.description}</dd>
+              <dt>Equipment:</dt>
+              <dd>{this.state.solanSun.equipment}</dd>
+              <dt>Date:</dt>
+              <dd>{this.state.solanSun.date}</dd>
+              <dt>Time:</dt>
+              <dd>{this.state.solanSun.time}</dd>
             </dl>
             <Link to={`/edit/${this.state.key}`} class="btn btn-success">Edit</Link>&nbsp;
-            <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger">Delete</button>
+            <button onClick={this.delete.bind(this, this.state.key)} class="btn btn-danger"><EditIcon fontSize="large"></EditIcon></button>
           </div>
         </div>
       </div>
     );
   }
 }
+
 
 export default Show;

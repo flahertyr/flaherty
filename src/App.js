@@ -3,30 +3,32 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
 
-class App extends Component {
+class userList extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection('boards');
+    this.ref = firebase.firestore().collection('solanSun');
     this.unsubscribe = null;
     this.state = {
-      boards: []
+      solanSun: []
     };
   }
 
   onCollectionUpdate = (querySnapshot) => {
-    const boards = [];
+    const solanSun = [];
     querySnapshot.forEach((doc) => {
-      const { title, description, author } = doc.data();
-      boards.push({
+      const { location, description, equipment, date, time } = doc.data();
+      solanSun.push({
         key: doc.id,
         doc, // DocumentSnapshot
-        title,
+        location,
         description,
-        author,
+        equipment,
+        date,
+        time
       });
     });
     this.setState({
-      boards
+      solanSun
    });
   }
 
@@ -36,29 +38,38 @@ class App extends Component {
 
   render() {
     return (
+        <div>
       <div class="container">
         <div class="panel panel-default">
+       
           <div class="panel-heading">
+          <div class="Link">
+            <h4><Link to="/create"></Link></h4>
+            </div>
             <h3 class="panel-title">
-              BOARD LIST
+              Solan Sunbed Pending Jobs
             </h3>
           </div>
-          <div class="panel-body">
-            <h4><Link to="/create" class="btn btn-primary">Add Board</Link></h4>
-            <table class="table table-stripe">
-              <thead>
+            <div class="table">
+            <table>
+              <thead class="table-stripe">
                 <tr>
-                  <th>Title</th>
+                  <th>Location</th>
                   <th>Description</th>
-                  <th>Author</th>
+                  <th>Equipment</th>
+                  <th>Date</th>
+                  <th>Time</th>
                 </tr>
               </thead>
-              <tbody>
-                {this.state.boards.map(board =>
+              
+              <tbody class="table-stripe2">
+                {this.state.solanSun.map(solanSunV =>
                   <tr>
-                    <td><Link to={`/show/${board.key}`}>{board.title}</Link></td>
-                    <td>{board.description}</td>
-                    <td>{board.author}</td>
+                    <td><Link to={`/show/${solanSunV.key}`}>{solanSunV.location}</Link></td>
+                    <td>{solanSunV.description}</td>
+                    <td>{solanSunV.equipment}</td>
+                    <td>{solanSunV.date}</td>
+                    <td>{solanSunV.time}</td>
                   </tr>
                 )}
               </tbody>
@@ -66,8 +77,10 @@ class App extends Component {
           </div>
         </div>
       </div>
+      </div>
     );
   }
 }
 
-export default App;
+
+export default userList;
