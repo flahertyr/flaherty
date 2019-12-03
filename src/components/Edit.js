@@ -82,7 +82,7 @@ class Edit extends Component {
             <h4><Link to={`/show/${this.state.key}`} class="btn btn-primary">JOB LIST</Link></h4>
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
-                <label for="Location">Title:</label>
+                <label for="Location">Location:</label>
                 <input type="text" class="form-control" name="location" value={this.state.location} onChange={this.onChange} placeholder="Location" />
               </div>
               <div class="form-group">
@@ -101,7 +101,7 @@ class Edit extends Component {
                 <label for="time">Time:</label>
                 <input type="text" class="form-control" name="time" value={this.state.time} onChange={this.onChange} placeholder="Time" />
               </div>
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="submit" class=""><img src="https://img.icons8.com/wired/64/000000/send.png"></img></button>
             </form>
           </div>
         </div>

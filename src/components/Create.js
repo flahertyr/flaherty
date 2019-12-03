@@ -82,7 +82,7 @@ class Create extends Component {
                 <label for="time">Time:</label>
                 <textArea class="form-control" name="time" onChange={this.onChange} placeholder="Time" cols="80" rows="1">{time}</textArea>
               </div>
-              <button type="submit" class="btn btn-success"><Link to="/create">Submit</Link></button>
+              <button type="submit"><Link to="/create"><img src="https://img.icons8.com/wired/64/000000/send.png"></img></Link></button>
             </form>
           </div>
         </div>

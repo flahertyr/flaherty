@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 import firebase from './Firebase';
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+
+import Navbar from './Navbar';
+
 
 
 
@@ -41,14 +43,14 @@ class userList extends Component {
 
   render() {
     return (
-        <div>
+      
+      <div>
+      <Navbar/>
+
       <div class="container">
         <div class="panel panel-default">
-       
           <div class="panel-heading">
-          <div class="Link">
-            <h4><Link to="/create"><LibraryAddIcon fontSize="large"></LibraryAddIcon></Link></h4>
-            </div>
+          
             <h3 class="panel-title">
               Solan Sunbed Pending Jobs
             </h3>
@@ -80,7 +82,7 @@ class userList extends Component {
           </div>
         </div>
       </div>
-      </div>
+    </div>
     );
   }
 }
